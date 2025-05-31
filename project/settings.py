@@ -213,12 +213,17 @@ CORS_ALLOW_HEADERS = list(default_headers) + [
 
 
 #  Redis setup
+import os
+
+REDIS_URL = os.environ.get("REDIS_URL", "redis://default:gltpIorsSJgUIXVzSLHTqzdrGdpaGeSj@shortline.proxy.rlwy.net:27988")
+
 CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-         "LOCATION": "redis://127.0.0.1:6379/0",    
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": REDIS_URL,
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
     }
 }
+
